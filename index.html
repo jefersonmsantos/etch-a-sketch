@@ -1,0 +1,74 @@
+<html>
+    
+
+    <body>
+        <button id="btn">Make new grid</button>
+        <div id="main_container"></div>
+
+
+    </body>
+
+    <script>
+        
+        const main_container = document.querySelector('#main_container')
+
+        function create_divs(ndivs){
+            for (i=1;i<=Math.pow(ndivs,2);i++){
+                const newdiv = document.createElement('div');
+                //adicionar classe ao container
+                //const para=document.createElement('p');
+                //para.textContent = i;
+                newdiv.style.width = (100/ndivs) + "%";
+                newdiv.style.height= (100/ndivs) + "%";
+              
+                //newdiv.appendChild(para);
+                newdiv.addEventListener('mouseover',function(){
+                    newdiv.style.backgroundColor=getRandomColor();
+                });
+                newdiv.addEventListener('mouseleave',function(){
+                    newdiv.style.backgroundColor='white';
+                });
+                main_container.appendChild(newdiv);
+
+                
+            }
+            
+            main_div_style();
+        }
+
+        function main_div_style(){
+           
+            main_container.style.display='flex';
+            main_container.style.flexDirection='row';
+            main_container.style.flexWrap='wrap';
+            main_container.style.height='100vh';
+
+        }
+
+        const btn=document.querySelector('#btn');
+        btn.addEventListener('click', function() {
+            while (main_container.firstChild){
+                main_container.removeChild(main_container.firstChild);
+            }
+
+            let number = prompt('Inform the size of the grid you want to see:');
+
+            create_divs(number);
+        });
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+
+
+    </script>
+
+
+
+</html>
